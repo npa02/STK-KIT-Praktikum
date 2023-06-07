@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huy's</title>
+</head>
+
+<body>
+    <form action="" method="get" class="form-example">
+        <!-- Texteingabefeld - Name -->
+        <label for="name">Ihre Name: </label>
+        <input type="text" name="name" id="name" required>
+        <br>
+
+        <!-- Geschlechtauswahl -->
+        <label for="geschlecht">Geschlecht:</label>
+        <br>
+        <input type="radio" id="weiblich">
+        <label for="weiblich">Weiblich</label>
+        <br>
+        <input type="radio" id="männlich">
+        <label for="männlich">Männlich</label>
+        <br>
+        <input type="radio" id="anders">
+        <label for="anders">Nicht eingeben</label>
+        <br>
+        <br>
+        <!-- Namen aller Dozenten des STKs am KIT -->
+        <label for="">Dozent/Dozentin:</label>
+
+        <select name="dozenten" id="dozenten" onchange="fotosAnzeigen()">
+            <option data-images="" value="notGiven" selected>--</option>
+            <option data-images="" value="Bell">Herr Bell</option>
+            <option data-images="" value="Busch">Herr Busch</option>
+            <option data-images="pics/HerrDege.jpg" value="Dege">Herr Dege</option>
+            <option data-images="pics/HerrNese.jpg" value="Nese">Herr Nese</option>
+            <option data-images="pics/FrauFazlic.jpg" value="Fazlic">Frau Fazlic</option>
+            <option data-images="" value="Runstuck">Herr Runstuck</option>
+            <option data-images="pics/HerrStirner.jpg" value="Stirner">Herr Stirner</option>
+            <option data-images="" value="Weldi">Herr Weldi</option>
+            <option data-images="pics/FrauWalburga.png" value="Walburga">Frau Walburga</option>
+        </select>
+        <br>
+        <i>
+            <small>
+                **Kleine Anmerkung: Ich habe nur Fotos von Herrn Dege, Herrn Nese, Frau Fazlic, Herrn Stirner und Frau
+                Walburga hinzugefügt. Vielleicht können Sie
+                sich also einfach Herrn Dege oder Frau Fazlic auswählen, um Fotos zu zeigen.
+            </small>
+        </i>
+        <br>
+        <img src="" alt="Dozenten am KIT" id="dozentenPic" style="display: none;">
+        <br>
+        <div id="fachspezifische" style="display: none;">
+            <form>
+                <label for="">Fragen: </label>
+                <br><br>
+                <input type="text">
+            </form>
+        </div>
+
+        <br>
+        <input type="submit" value="Antwort senden">
+        <input type="reset" value="Abbrechen" id="reset">
+
+    </form>
+
+    <!-- Js -->
+    <script>
+
+        // connect voi question
+
+        var fotos = document.getElementById("dozentenPic");
+        var inhaltAnzeigen = document.getElementById("dozenten");
+        function fotosAnzeigen() {
+            inhaltAnzeigen.addEventListener("click", function () {
+                var verfuegbar = inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].dataset.images;
+                if (verfuegbar !== "") {
+                    fotos.src = verfuegbar;
+                    fotos.style.display = "block";
+                }
+                else {
+                    fotos.style.display = "none";
+
+                }
+                var selectedVal = inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value;
+                fragenAnzeigen(selectedVal);
+            })
+        };
+        function fragenAnzeigen(key) {
+            fachspezifische.style.display = "block";
+            switch (key) {
+                case "Bell":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Bestimmen Sie eine Normalenform der Ebene E?";
+                    break;
+                case "Busch":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Wie groß ist das Trägheitsmoment des Systems Block-Stab-Geschoss bezüglich der Drehung um Punkt A?";
+                    break;
+                case "Dege":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Haben Sie schon gegessen? :D ";
+                    break;
+                case "Nese":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Was ist unterschied zwischen Ionenbindung";
+                    break;
+                case "Fazlic":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Wie denken Sie über dieses Thema?";
+                    break;
+                case "Runstuck":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Welche dieser Mengen lässt sich durch die Teilbarkeitsrelation linear (total) ordnen?";
+                    break;
+                case "Stirner":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Nun ist es doch geschehen! Die &#128125;&#128125; haben endlich Kontakt mit uns aufgenommen. Wie viel Speicherplatz benötigt diese Nachricht, wenn diese Zeichen (auf der Erde &#128514; ) in Unicode gespeichert werden?";
+                    break;
+                case "Weldi":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "In welche Richtung wird ein Elektron abgelenkt?";
+                    break;
+                case "Walburga":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Erklären Sie kurz, was man in der angewandten Logik unter einem Gatter versteht.";
+                    break;
+                default:
+                    break;
+            }
+        };
+        var resetClick = document.getElementById("reset");
+        resetClick.addEventListener("click", function () {
+            details.style.display = "none";
+        })
+
+    </script>
+</body>
+
+</html>
