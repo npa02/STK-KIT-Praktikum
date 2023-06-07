@@ -28,11 +28,8 @@
         <label for="anders">Nicht eingeben</label>
         <br>
         <br>
-        <input type="submit" value="Absenden">
-        <input type="reset" value="Abbrechen">
-        <br><br><br>
         <!-- Namen aller Dozenten des STKs am KIT -->
-        <label for="cars">Dozent/Dozentin:</label>
+        <label for="">Dozent/Dozentin:</label>
 
         <select name="dozenten" id="dozenten" onchange="fotosAnzeigen()">
             <option value="">--</option>
@@ -47,26 +44,41 @@
             <option value="pics/FrauWalburga.png">Frau Walburga</option>
         </select>
         <br>
-        <img src="pics/none.jpg" alt="Dozenten am KIT" id="dozentenPic" style="display: none;">
         <i>
             <small>
-                **Kleine Anmerkung: Ich habe nur Fotos von Herrn Dege, Herrn Nese, Frau Fazlic, Herrn Stirner und Frau Walburga hinzugefügt. Vielleicht können Sie
-                sich also einfach Herrn Dege oder Frau Fazlic auswählen, um Fotos zu zeigen
+                **Kleine Anmerkung: Ich habe nur Fotos von Herrn Dege, Herrn Nese, Frau Fazlic, Herrn Stirner und Frau
+                Walburga hinzugefügt. Vielleicht können Sie
+                sich also einfach Herrn Dege oder Frau Fazlic auswählen, um Fotos zu zeigen.
             </small>
         </i>
+        <br>
+        <img src="" alt="Dozenten am KIT" id="dozentenPic" style="display: none;">
+        <br>
+        <input type="submit" value="Absenden">
+        <input type="reset" value="Abbrechen" id="reset">
 
     </form>
 
     <!-- Js -->
     <script>
+        var fotos = document.getElementById("dozentenPic");
+        var picAnzeigen = document.getElementById("dozenten");
         function fotosAnzeigen() {
-            var fotos = document.getElementById("dozentenPic");
-            var picAnzeigen = document.getElementById("dozenten");
             picAnzeigen.addEventListener("click", function () {
-                fotos.style.display = "block";
-                fotos.src = picAnzeigen.value;
+                if (picAnzeigen.value !== "") {
+                    fotos.src = picAnzeigen.value;
+                    fotos.style.display = "block";
+                }
+                else {
+                    fotos.style.display = "none";
+
+                }
             })
         };
+        var resetClick = document.getElementById("reset");
+        resetClick.addEventListener("click", function () {
+            fotos.style.display = "none";
+        })
 
     </script>
 </body>
