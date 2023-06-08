@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huy's</title>
+    <style>
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            width: 150px;
+        }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="get" class="" onsubmit="return false;">
+        <fieldset>
+
+            <!-- Texteingabefeld - Name -->
+            <label for="name">Ihre Name: </label>
+            <input type="text" placeholder="Name" name="name" id="name" required>
+            <br>
+
+            <!-- Geschlechtauswahl -->
+            <label for="geschlecht">Geschlecht:</label>
+            <br>
+            <label><input type="radio" name="sex">Weiblich</label>
+            <br>
+            <label><input type="radio" name="sex">Männlich</label>
+            <br>
+            <label><input type="radio" name="sex">&#128580;</label>
+            <br>
+            <br>
+            <!-- Namen aller Dozenten des STKs am KIT -->
+            <label for="">Dozent/Dozentin:</label>
+
+            <select name="dozenten" id="dozenten" onchange="fotosAnzeigen()">
+                <option data-images="" value="notGiven" selected>--</option>
+                <option data-images="" value="Bell">Herr Bell</option>
+                <option data-images="" value="Busch">Herr Busch</option>
+                <option data-images="pics/HerrDege.jpg" value="Dege">Herr Dege</option>
+                <option data-images="pics/HerrNese.jpg" value="Nese">Herr Nese</option>
+                <option data-images="pics/FrauFazlic.jpg" value="Fazlic">Frau Fazlic</option>
+                <option data-images="" value="Runstuck">Herr Runstuck</option>
+                <option data-images="pics/HerrStirner.jpg" value="Stirner">Herr Stirner</option>
+                <option data-images="" value="Weldi">Herr Weldi</option>
+                <option data-images="pics/FrauWalburga.png" value="Walburga">Frau Walburga</option>
+            </select>
+            <br>
+            <i>
+                <small>
+                    **Kleine Anmerkung: Ich habe nur Fotos von Herrn Dege, Herrn Nese, Frau Fazlic, Herrn Stirner und
+                    Frau
+                    Walburga hinzugefügt. Vielleicht können Sie
+                    sich also einfach Herrn Dege oder Frau Fazlic auswählen, um Fotos zu zeigen.
+                </small>
+            </i>
+            <br>
+            <img src="" alt="Dozenten am KIT" id="dozentenPic" style="display: none;">
+            <br>
+            <div id="fachspezifische" style="display: none;">
+                <form>
+                    <label for="">Fragen: </label>
+                    <br><br>
+                    <label><input name="Fragen" type="radio" id="Ja">Ja</label>
+                    <label><input name="Fragen" type="radio" id="Nein">Nein</label>
+                    <br><br>
+                </form>
+            </div>
+            <p id="score"></p>
+            <input type="submit" value="Antwort senden" id="send">
+            <input type="reset" value="Abbrechen" id="reset">
+        </fieldset>
+
+    </form>
+
+    <!-- Js -->
+    <script>
+
+        // check ans
+
+        var fotos = document.getElementById("dozentenPic");
+        var inhaltAnzeigen = document.getElementById("dozenten");
+        // Show pics 
+        function fotosAnzeigen() {
+            inhaltAnzeigen.addEventListener("click", function () {
+                var verfuegbar = inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].dataset.images;
+                if (verfuegbar !== "") {
+                    fotos.src = verfuegbar;
+                    fotos.style.display = "block";
+                }
+                else {
+                    fotos.style.display = "none";
+
+                }
+                var selectedVal = inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value;
+                fragenAnzeigen(selectedVal);
+            })
+        };
+        // Display realting question
+        function fragenAnzeigen(key) {
+            fachspezifische.style.display = "block";
+            switch (key) {
+                case "Bell":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist das eine Normalenform der Ebene E?";
+                    break;
+                case "Busch":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist es das Trägheitsmoment des Systems Block-Stab-Geschoss bezüglich der Drehung um Punkt A?";
+                    break;
+                case "Dege":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Haben Sie schon gegessen? :D ";
+                    break;
+                case "Nese":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Haben Sie schon Ionenbindung bestimmmt?";
+                    break;
+                case "Fazlic":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Deutsch schwer?";
+                    break;
+                case "Runstuck":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Mathe schwer?";
+                    break;
+                case "Stirner":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Nun ist es doch geschehen! Die &#128125;&#128125; haben endlich Kontakt mit uns aufgenommen. Benötigt diese Nachricht 64B, wenn diese Zeichen (auf der Erde &#128514; ) in Unicode gespeichert werden?";
+                    break;
+                case "Weldi":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Physik einfach?";
+                    break;
+                case "Walburga":
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Sind alle Ladung positiv?";
+                    break;
+                default:
+                    break;
+            }
+        };
+        var resetClick = document.getElementById("reset");
+        resetClick.addEventListener("click", function () {
+            fotos.style.display = "none";
+            fachspezifische.style.display = "none";
+            document.getElementById("score").innerHTML = "";
+        })
+
+        var anwortSenden = document.getElementById("send");
+        anwortSenden.addEventListener("click", function () {
+
+            switch (inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value) {
+                case "Bell":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Busch":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Dege":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Nese":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Fazlic":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Runstuck":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Stirner":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Weldi":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+                case "Walburga":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Gut! 🥰"
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Oh nein 😢";
+                    }
+                    break;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
