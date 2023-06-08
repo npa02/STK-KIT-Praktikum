@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <form action="" method="get" class="" onsubmit="return false;">
+    <form name="Form" action="" method="get" class="" onsubmit="return false;">
         <fieldset>
 
             <!-- Texteingabefeld - Name -->
@@ -150,81 +150,103 @@
         var anwortSenden = document.getElementById("send");
         anwortSenden.addEventListener("click", function () {
 
-            switch (inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value) {
-                case "Bell":
-                    if (document.getElementById('Ja').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+            if (checkName() == false) {
+                alert("Please Fill In All Required Fields");
+            }
+            else {
+                if (document.getElementById('Ja').checked) {
+                    document.getElementById('Nein').disabled = "true";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Busch":
-                    if (document.getElementById('Nein').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                } else {
+                    document.getElementById('Ja').disabled = "true";
+                }
+                switch (inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value) {
+                    case "Bell":
+                        if (document.getElementById('Ja').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Dege":
-                    if (document.getElementById('Ja').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Busch":
+                        if (document.getElementById('Nein').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Nese":
-                    if (document.getElementById('Nein').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Dege":
+                        if (document.getElementById('Ja').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Fazlic":
-                    if (document.getElementById('Nein').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Nese":
+                        if (document.getElementById('Nein').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Runstuck":
-                    if (document.getElementById('Nein').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Fazlic":
+                        if (document.getElementById('Nein').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Stirner":
-                    if (document.getElementById('Ja').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Runstuck":
+                        if (document.getElementById('Nein').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Weldi":
-                    if (document.getElementById('Nein').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Stirner":
+                        if (document.getElementById('Ja').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
-                case "Walburga":
-                    if (document.getElementById('Ja').checked) {
-                        document.getElementById("score").innerHTML = "Gut! 🥰"
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Weldi":
+                        if (document.getElementById('Nein').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
 
-                    } else {
-                        document.getElementById("score").innerHTML = "Oh nein 😢";
-                    }
-                    break;
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                    case "Walburga":
+                        if (document.getElementById('Ja').checked) {
+                            document.getElementById("score").innerHTML = "Gut! 🥰";
+
+                        } else {
+                            document.getElementById("score").innerHTML = "Oh nein 😢";
+                        }
+                        break;
+                }
             }
         });
+        function checkName() {
+            var nameLength = document.forms["Form"]["name"].value.length;
+            if (nameLength == 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
 
     </script>
 </body>
