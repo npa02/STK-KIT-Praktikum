@@ -85,11 +85,9 @@
     <!-- Js -->
     <script>
 
-        // check ans
-
+        //DISPLAY PICS
         var fotos = document.getElementById("dozentenPic");
         var inhaltAnzeigen = document.getElementById("dozenten");
-        // Show pics 
         function fotosAnzeigen() {
             inhaltAnzeigen.addEventListener("click", function () {
                 var verfuegbar = inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].dataset.images;
@@ -105,48 +103,137 @@
                 fragenAnzeigen(selectedVal);
             })
         };
-        // Display realting question
+
+        // DISPLAY RELATING QUESTION
+
+        var frageAntwort = [
+            {
+                question: "Ist das eine Normalenform der Ebene E?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+            {
+
+                question: "Ist es das Trägheitsmoment des Systems Block-Stab-Geschoss bezüglich der Drehung um Punkt A?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Nein"
+            },
+            {
+                question: "Haben Sie schon gegessen? :D",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+            {
+                question: "Haben Sie schon Ionenbindung bestimmmt?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+            {
+                question: "Ist Deutsch schwer?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Nein"
+            },
+            {
+                question: "Ist Mathe schwer?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Nein"
+            },
+            {
+                question: "Nun ist es doch geschehen! Die &#128125;&#128125; haben endlich Kontakt mit uns aufgenommen. Benötigt diese Nachricht 64B, wenn diese Zeichen (auf der Erde &#128514; ) in Unicode gespeichert werden?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+            {
+                question: "Ist Physik einfach?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+            {
+                question: "Sind alle Ladung positiv?",
+                answers: {
+                    1: "Ja",
+                    2: "Nein"
+                },
+                richtigeAntwort: "Ja"
+            },
+
+
+        ]
+
+
         function fragenAnzeigen(key) {
             fachspezifische.style.display = "block";
             switch (key) {
                 case "Bell":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist das eine Normalenform der Ebene E?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[0].question;
                     break;
                 case "Busch":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist es das Trägheitsmoment des Systems Block-Stab-Geschoss bezüglich der Drehung um Punkt A?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[1].question;
                     break;
                 case "Dege":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Haben Sie schon gegessen? :D ";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[2].question;
                     break;
                 case "Nese":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Haben Sie schon Ionenbindung bestimmmt?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[3].question;
                     break;
                 case "Fazlic":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Deutsch schwer?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[4].question;
                     break;
                 case "Runstuck":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Mathe schwer?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[5].question
                     break;
                 case "Stirner":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Nun ist es doch geschehen! Die &#128125;&#128125; haben endlich Kontakt mit uns aufgenommen. Benötigt diese Nachricht 64B, wenn diese Zeichen (auf der Erde &#128514; ) in Unicode gespeichert werden?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[6].question;
                     break;
                 case "Weldi":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Ist Physik einfach?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[7].question;
                     break;
                 case "Walburga":
-                    document.getElementById("fachspezifische").firstElementChild.innerHTML = "Sind alle Ladung positiv?";
+                    document.getElementById("fachspezifische").firstElementChild.innerHTML = frageAntwort[8].question;
                     break;
                 default:
+                    fachspezifische.style.display = "none";
                     break;
             }
         };
+
+        // RESET BUTTON
         var resetClick = document.getElementById("reset");
         resetClick.addEventListener("click", function () {
             fotos.style.display = "none";
             fachspezifische.style.display = "none";
             document.getElementById("score").innerHTML = "";
+
+            //RESET INPUT
+            document.getElementById('Nein').disabled = false;
+            document.getElementById('Ja').disabled = false;
         })
 
+        // ANTWORT BUTTON 
         var anwortSenden = document.getElementById("send");
         anwortSenden.addEventListener("click", function () {
 
@@ -154,88 +241,18 @@
                 alert("Please Fill In All Required Fields");
             }
             else {
+                checkAns();
                 if (document.getElementById('Ja').checked) {
-                    document.getElementById('Nein').disabled = "true";
+                    document.getElementById('Nein').disabled = true;
 
                 } else {
-                    document.getElementById('Ja').disabled = "true";
-                }
-                switch (inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value) {
-                    case "Bell":
-                        if (document.getElementById('Ja').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Busch":
-                        if (document.getElementById('Nein').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Dege":
-                        if (document.getElementById('Ja').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Nese":
-                        if (document.getElementById('Nein').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Fazlic":
-                        if (document.getElementById('Nein').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Runstuck":
-                        if (document.getElementById('Nein').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Stirner":
-                        if (document.getElementById('Ja').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Weldi":
-                        if (document.getElementById('Nein').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
-                    case "Walburga":
-                        if (document.getElementById('Ja').checked) {
-                            document.getElementById("score").innerHTML = "Gut! 🥰";
-
-                        } else {
-                            document.getElementById("score").innerHTML = "Oh nein 😢";
-                        }
-                        break;
+                    document.getElementById('Ja').disabled = true;
                 }
             }
+            
         });
+
+        //CHECK IF NAME IS FILLED
         function checkName() {
             var nameLength = document.forms["Form"]["name"].value.length;
             if (nameLength == 0) {
@@ -246,6 +263,153 @@
             }
         }
 
+        //CHECK IF ANSWER IS CORRECT
+        function checkAns() {
+
+            //Chưa tối ưu được đoạn này, đoạn này nhìn ngu vlvlvl :(((((
+            var numCorrect = 0;
+
+            switch (inhaltAnzeigen.options[inhaltAnzeigen.selectedIndex].value) {
+                case "Bell":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Busch":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Dege":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Nese":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Fazlic":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Runstuck":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Stirner":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        // color the answers red
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Weldi":
+                    if (document.getElementById('Nein').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "Walburga":
+                    if (document.getElementById('Ja').checked) {
+                        document.getElementById("score").innerHTML = "Richtig. Gut! 🥰";
+                        // add to the number of correct answers
+                        numCorrect++;
+
+                        // color the answers green
+                        fachspezifische.style.color = 'green';
+
+                    } else {
+                        document.getElementById("score").innerHTML = "Falsch. Oh nein 😢";
+                        fachspezifische.style.color = 'red';
+                    }
+                    break;
+                case "--": //Chua fix duoc doan nay vi chua reset input
+                    document.getElementById("score").innerHTML.style.display = "none";
+                    break;
+            }
+            document.getElementById("score").innerHTML += '<br>' + numCorrect + ' out of ' + frageAntwort.length;
+
+        }
 
 
     </script>
